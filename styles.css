@@ -94,7 +94,7 @@ img {
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: 0.5rem 0;
+  padding: 0.2rem 0;
   background: rgba(0, 0, 0, 1);
 }
 
@@ -109,7 +109,7 @@ img {
 }
 
 .nav-logo img {
-  height: 64px;
+  height: 56px;
   width: auto;
   object-fit: contain;
   transition: transform 0.3s;
