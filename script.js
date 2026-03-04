@@ -86,7 +86,9 @@
     }, 300);
   });
 
-  const revealObserver = new IntersectionObserver(function (entries) {
+  var revealElements = [];
+
+  var revealObserver = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
@@ -94,15 +96,25 @@
       }
     });
   }, {
-    threshold: 0.12,
-    rootMargin: '0px 0px -60px 0px'
+    threshold: 0.05,
+    rootMargin: '40px 0px -20px 0px'
   });
 
   document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-scale, .reveal-right-delay, .reveal-rotate, .reveal-blur, .reveal-clip, .stagger-children').forEach(function (el) {
     if (!el.closest('#inicio')) {
       revealObserver.observe(el);
+      revealElements.push(el);
     }
   });
+
+  // Fallback: reveal any elements still hidden after 3.5s
+  setTimeout(function () {
+    revealElements.forEach(function (el) {
+      if (!el.classList.contains('visible')) {
+        el.classList.add('visible');
+      }
+    });
+  }, 3500);
 
   const storeProgress = document.querySelector('.sp-fill');
   const storeObserver = new IntersectionObserver(function (entries) {
